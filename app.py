@@ -31,12 +31,11 @@ def predict():
         overs = float(request.form.get('overs', 0))
         wickets = int(request.form.get('wickets', 0))
 
-        
+        # Validation
         if batting_team == bowling_team:
             return render_template('index.html', teams=teams, cities=cities,
                                    result="Teams cannot be same")
 
-        
         runs_left = target - score
         balls_left = 120 - (overs * 6)
         wickets_left = 10 - wickets
@@ -56,6 +55,8 @@ def predict():
             'rrr':[rrr]
         })
 
+        print(input_df)  # DEBUG
+
         result = pipe.predict_proba(input_df)
 
         win = round(result[0][1] * 100)
@@ -67,7 +68,7 @@ def predict():
                                result=f"{batting_team}: {win}% | {bowling_team}: {loss}%")
 
     except Exception as e:
-        return f"Error: {str(e)}"
+        return f"ERROR: {str(e)}"
 
 
 if __name__ == "__main__":
