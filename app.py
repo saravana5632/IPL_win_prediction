@@ -44,7 +44,11 @@ def predict():
         'crr':[crr],
         'rrr':[rrr]
     })
-
+if batting_team == bowling_team:
+    return render_template('index.html',
+        teams=teams,
+        cities=cities,
+        result="Batting and Bowling team cannot be same")
     result = pipe.predict_proba(input_df)
     win = round(result[0][1]*100)
     loss = round(result[0][0]*100)
