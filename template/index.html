@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IPL Win Prediction</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            width: 400px;
+            margin: auto;
+            margin-top: 50px;
+            padding: 20px;
+            background: #1e293b;
+            border-radius: 10px;
+        }
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 8px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            padding: 10px 20px;
+            background: #22c55e;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #16a34a;
+        }
+        h2 {
+            color: #38bdf8;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #facc15;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>IPL Win Predictor</h2>
+
+    <form action="/predict" method="post">
+
+        <select name="batting_team">
+            <option>Select Batting Team</option>
+            {% for team in teams %}
+            <option value="{{team}}">{{team}}</option>
+            {% endfor %}
+        </select>
+
+        <select name="bowling_team">
+            <option>Select Bowling Team</option>
+            {% for team in teams %}
+            <option value="{{team}}">{{team}}</option>
+            {% endfor %}
+        </select>
+
+        <select name="city">
+            <option>Select City</option>
+            {% for city in cities %}
+            <option value="{{city}}">{{city}}</option>
+            {% endfor %}
+        </select>
+
+        <input type="number" name="target" placeholder="Target Score" required>
+        <input type="number" name="score" placeholder="Current Score" required>
+        <input type="number" step="0.1" name="overs" placeholder="Overs Completed" required>
+        <input type="number" name="wickets" placeholder="Wickets Lost" required>
+
+        <br><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if result %}
+    <div class="result">
+        {{ result }}
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
