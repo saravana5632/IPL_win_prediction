@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-# Load model safely
+
 model_path = os.path.join(os.path.dirname(__file__), 'pipe.pkl')
 pipe = pickle.load(open(model_path, 'rb'))
 
@@ -31,12 +31,12 @@ def predict():
         overs = float(request.form.get('overs', 0))
         wickets = int(request.form.get('wickets', 0))
 
-        # Validation
+        
         if batting_team == bowling_team:
             return render_template('index.html', teams=teams, cities=cities,
                                    result="Teams cannot be same")
 
-        # Feature Engineering
+        
         runs_left = target - score
         balls_left = 120 - (overs * 6)
         wickets_left = 10 - wickets
