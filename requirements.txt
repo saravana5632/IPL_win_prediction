@@ -1,4 +1,3 @@
-streamlit
-scikit-learn
+flask
 pandas
-numpy
+scikit-learn
