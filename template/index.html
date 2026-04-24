@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>IPL Win Prediction</title>
+    <title>IPL Win Predictor</title>
     <style>
         body {
             font-family: Arial;
@@ -32,16 +32,10 @@
             color: white;
             cursor: pointer;
         }
-        button:hover {
-            background: #16a34a;
-        }
-        h2 {
-            color: #38bdf8;
-        }
         .result {
             margin-top: 20px;
             font-size: 18px;
-            color: #facc15;
+            color: yellow;
         }
     </style>
 </head>
@@ -52,40 +46,34 @@
 
     <form action="/predict" method="post">
 
-        <select name="batting_team">
-            <option>Select Batting Team</option>
+        <select name="batting_team" required>
             {% for team in teams %}
             <option value="{{team}}">{{team}}</option>
             {% endfor %}
         </select>
 
-        <select name="bowling_team">
-            <option>Select Bowling Team</option>
+        <select name="bowling_team" required>
             {% for team in teams %}
             <option value="{{team}}">{{team}}</option>
             {% endfor %}
         </select>
 
-        <select name="city">
-            <option>Select City</option>
+        <select name="city" required>
             {% for city in cities %}
             <option value="{{city}}">{{city}}</option>
             {% endfor %}
         </select>
 
-        <input type="number" name="target" placeholder="Target Score" required>
-        <input type="number" name="score" placeholder="Current Score" required>
-        <input type="number" step="0.1" name="overs" placeholder="Overs Completed" required>
-        <input type="number" name="wickets" placeholder="Wickets Lost" required>
+        <input type="number" name="target" placeholder="Target" required>
+        <input type="number" name="score" placeholder="Score" required>
+        <input type="number" step="0.1" name="overs" placeholder="Overs" required>
+        <input type="number" name="wickets" placeholder="Wickets" required>
 
-        <br><br>
         <button type="submit">Predict</button>
     </form>
 
     {% if result %}
-    <div class="result">
-        {{ result }}
-    </div>
+    <div class="result">{{ result }}</div>
     {% endif %}
 </div>
 
